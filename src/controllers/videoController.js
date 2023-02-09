@@ -1,12 +1,20 @@
 import Video from "../models/Video";
 
 // trending
-export const home = (req, res) => {
-  console.log("Start");
+
+/*
+  console.log("start")
   Video.find({}, (error, videos) => {
-    console.log("hello");
+    if(error) {
+      return res.render("server-error")
+    }
+    return res.render("home", { pageTitle: "Home", videos });
   });
-  return res.render("home", { pageTitle: "Home", videos: [] });
+  console.log("finished");
+*/
+export const home = async (req, res) => {
+  const videos = await Video.find({});
+  return res.render("home", { pageTitle: "Home", videos });
 };
 
 // watch
