@@ -2,8 +2,11 @@ import Video from "../models/Video";
 
 // trending
 export const home = (req, res) => {
-  Video.find({}, (error, videos) => {});
-  return res.render("home", { pageTitle: "Home" });
+  console.log("Start");
+  Video.find({}, (error, videos) => {
+    console.log("hello");
+  });
+  return res.render("home", { pageTitle: "Home", videos: [] });
 };
 
 // watch
