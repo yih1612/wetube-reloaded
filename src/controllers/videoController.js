@@ -2,16 +2,13 @@ import Video from "../models/Video";
 
 // trending
 
-/*
-  console.log("start")
+/* callback
   Video.find({}, (error, videos) => {
-    if(error) {
-      return res.render("server-error")
-    }
     return res.render("home", { pageTitle: "Home", videos });
   });
-  console.log("finished");
 */
+
+/* promise */
 export const home = async (req, res) => {
   const videos = await Video.find({});
   return res.render("home", { pageTitle: "Home", videos });
@@ -39,6 +36,17 @@ export const getUpload = (req, res) => {
   return res.render("upload", { pageTitle: "Upload Video" });
 };
 export const postUpload = (req, res) => {
-  const { title } = req.body;
+  const { title, description, hashtags } = req.body;
+  const video = new Video({
+    title: title,
+    description: description,
+    createdAt: Date.now(),
+    hashtags: hashtags.split(",").map((word) => `#${word}`),
+    meta: {
+      views: 0,
+      rating: 0,
+    },
+  });
+  console.log(video);
   return res.redirect("/");
 };
