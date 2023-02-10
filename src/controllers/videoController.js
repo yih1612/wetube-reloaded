@@ -11,14 +11,14 @@ import Video from "../models/Video";
 /* promise */
 export const home = async (req, res) => {
   const videos = await Video.find({});
-  console.log(videos);
   return res.render("home", { pageTitle: "Home", videos });
 };
 
 // watch
-export const watch = (req, res) => {
+export const watch = async (req, res) => {
   const { id } = req.params; // const id = req.param.id;
-  return res.render("watch", { pageTitle: `Watching` });
+  const video = await Video.findById(id);
+  return res.render("watch", { pageTitle: video.title, video });
 };
 
 // edit
