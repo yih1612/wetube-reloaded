@@ -34,7 +34,6 @@ export const getEdit = async (req, res) => {
 export const postEdit = async (req, res) => {
   const { id } = req.params;
   const { title, description, hashtags } = req.body;
-  console.log(hashtags);
   const video = await Video.exists({ _id: id });
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found." });
@@ -44,7 +43,6 @@ export const postEdit = async (req, res) => {
     description,
     hashtags: Video.formatHashtags(hashtags),
   });
-  console.log(hashtags);
 
   return res.redirect(`/videos/${id}`);
 };
@@ -89,7 +87,6 @@ export const search = async (req, res) => {
         $regex: new RegExp(keyword, "i"),
       },
     });
-    console.log(videos);
   }
   return res.render("search", { pageTitle: "Search", videos });
 };
