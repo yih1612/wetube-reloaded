@@ -58,6 +58,8 @@ export const postLogin = async (req, res) => {
 };
 
 export const startGithubLogin = (req, res) => {
+  // 역할: 몇몇 configuration parameter를 가지고 URL을 만드는 것
+  // URL을 설정하는 이유: URL이 Github에게 뭔가를 알려줄 수 있어서
   const baseUrl = `https://github.com/login/oauth/authorize`;
   const config = {
     client_id: process.env.GH_CLIENT,
@@ -74,6 +76,7 @@ export const finishGithubLogin = async (req, res) => {
   const config = {
     client_id: process.env.GH_CLIENT,
     client_secret: process.env.GH_SECRET,
+    // Github가 우리에게 준 code
     code: req.query.code,
   };
   const params = new URLSearchParams(config).toString();
@@ -109,6 +112,7 @@ export const finishGithubLogin = async (req, res) => {
       (email) => email.primary === true && email.verified === true
     );
     if (!emailObj) {
+      // set notification (why? 유저한테 Github로 로그인했다는걸 알려주기 위해서)
       return res.redirect("/login");
     }
     let user = await User.findOne({ email: emailObj.email });
@@ -122,7 +126,6 @@ export const finishGithubLogin = async (req, res) => {
         socialOnly: true,
         location: userData.location,
       });
-      console.log("haha");
     }
     req.session.loggedIn = true;
     req.session.user = user;
