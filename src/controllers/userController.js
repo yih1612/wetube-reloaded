@@ -137,7 +137,23 @@ export const finishGithubLogin = async (req, res) => {
 export const getEdit = (req, res) => {
   return res.render("edit-profile", { pageTitle: "Edit Profile" });
 };
-export const postEdit = (req, res) => {
+export const postEdit = async (req, res) => {
+  // ES6
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { name, email, username, location },
+  } = req;
+  // 두줄을 간단히
+  // const { id } = req.session.user;
+  // const { name, email, username, location } = req.body;
+  await User.findByIdAndUpdate(_id, {
+    name,
+    email,
+    username,
+    location,
+  });
   return res.render("edit-profile");
 };
 export const logout = (req, res) => {
