@@ -196,7 +196,41 @@ export const getChangePassword = (req, res) => {
     pageTitle: "Change Password",
   });
 };
-export const postChangePassword = (req, res) => {
-  return res.redirect("/");
+export const postChangePassword = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { oldPwd, newPwd, newPwdConfirmation },
+  } = req;
+  const user = await User.findById(_id);
+  const ok = await bcrypt.compare(oldPwd, user.password);
+  const pageTitle = "Change Password";
+  if (!ok) {
+    return res.status(400).render("./users/change-password", {
+      pageTitle,
+      errorMessage: "The current password is incorrect",
+    });
+  }
+  if (newPwd !== newPwdConfirmation) {
+    return res.status(400).render("./users/change-password", {
+      pageTitle,
+      errorMessage: "The password does not match the confirmation",
+    });
+  }
+  if (oldPwd === newPwd) {
+    return res.status(400).render("users/change-password", {
+      pageTitle,
+      errorMessage: "The old password equals new password",
+    });
+  }
+  user.password = newPwd;
+  // password hash
+  await user.save();
+  // redirect를 logout으로 하고 있기 때문에 세션에 굳이 넣을 필요가 없다
+  // logout을 안하고 login중이라면 아래 문구가 필요!
+  // req.session.user.password = user.password;
+  req.session.destroy();
+  return res.redirect("/login");
 };
 export const see = (req, res) => res.send("See User");
