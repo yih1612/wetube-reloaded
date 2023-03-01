@@ -99,7 +99,6 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    console.log("userData: ", userData);
     const emailData = await (
       await fetch(`${apiUrl}/user/emails`, {
         headers: {
@@ -107,7 +106,6 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    console.log("emailData: ", emailData);
     const emailObj = emailData.find(
       (email) => email.primary === true && email.verified === true
     );
@@ -141,12 +139,11 @@ export const postEdit = async (req, res) => {
   // ES6
   const {
     session: {
-      user: { _id, email: sessionEmail, username: sessionUsername },
+      user: { _id, avatarUrl, email: sessionEmail, username: sessionUsername },
     },
     body: { name, email, username, location },
     file,
   } = req;
-  console.log(file);
   // 두줄을 간단히
   // const { id } = req.session.user;
   // const { name, email, username, location } = req.body;
@@ -173,6 +170,7 @@ export const postEdit = async (req, res) => {
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
+      avatarUrl: file ? file.path : avatarUrl,
       name,
       email,
       username,
