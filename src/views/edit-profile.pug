@@ -3,7 +3,9 @@ extends base
 block content
   if message
     span= message
-  form(method="POST")
+  form(method="POST", enctype="multipart/form-data")
+    label(for="avatar") Avatar
+    input#avatar(type="file", name="avatar", accept=".png, .jpg, .jpeg")
     input(
       placeholder="Name",
       name="name",

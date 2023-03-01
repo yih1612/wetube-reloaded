@@ -144,7 +144,9 @@ export const postEdit = async (req, res) => {
       user: { _id, email: sessionEmail, username: sessionUsername },
     },
     body: { name, email, username, location },
+    file,
   } = req;
+  console.log(file);
   // 두줄을 간단히
   // const { id } = req.session.user;
   // const { name, email, username, location } = req.body;
