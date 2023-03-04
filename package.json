@@ -34,6 +34,7 @@
     "@prettier/plugin-pug": "^2.4.1",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
+    "mini-css-extract-plugin": "^2.7.2",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.3",
     "sass": "^1.58.3",
