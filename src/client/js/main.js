@@ -1,1 +1,3 @@
-alert("hallow");
+import "../scss/styles.scss";
+
+console.log("hi");
