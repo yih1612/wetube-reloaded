@@ -104,6 +104,13 @@ const handleMouseLeave = () => {
   controlsTimeout = setTimeout(hideControls, 3000);
 };
 
+const handlePlayKeydown = (event) => {
+  if (event.key === " ") {
+    event.preventDefault();
+    handlePlayClick();
+  }
+};
+
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click", handleMute);
 volumeRange.addEventListener("input", handleVolumeChange);
@@ -113,3 +120,7 @@ timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullScreen);
 video.addEventListener("mousemove", handleMouseMove);
 video.addEventListener("mouseleave", handleMouseLeave);
+// 비디오 클릭시 재생/멈춤
+video.addEventListener("click", handlePlayClick);
+// 스페이스바로 재생/멈춤
+document.addEventListener("keydown", handlePlayKeydown);
