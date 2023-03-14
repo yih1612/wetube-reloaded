@@ -78,36 +78,38 @@ const handleFullScreen = () => {
   const fullscreen = document.fullscreenElement;
   if (fullscreen) {
     document.exitFullscreen();
-    fullScreenBtn.innerText = "Enter Full Screen";
   } else {
     videoContainer.requestFullscreen();
-    fullScreenBtn.innerText = "Exit Full Screen";
   }
 };
-
-const hideControls = () => videoControls.classList.remove("showing");
 
 const handleMouseMove = () => {
   if (controlsTimeout) {
     clearTimeout(controlsTimeout);
     controlsTimeout = null;
   }
-  if (controlsMovementTimeout) {
-    clearTimeout(controlsMovementTimeout);
-    controlsMovementTimeout = null;
-  }
   videoControls.classList.add("showing");
-  controlsTimeout = setTimeout(hideControls, 3000);
-};
-
-const handleMouseLeave = () => {
-  controlsTimeout = setTimeout(hideControls, 3000);
+  controlsTimeout = setTimeout(() => {
+    videoControls.classList.remove("showing");
+  }, 3000);
 };
 
 const handlePlayKeydown = (event) => {
   if (event.key === " ") {
     event.preventDefault();
     handlePlayClick();
+  }
+  if (event.key === "F" || event.key === "f") {
+    handleFullScreen();
+  }
+};
+
+const handleFullscreenChange = () => {
+  const fullscreen = document.fullscreenElement;
+  if (fullscreen) {
+    fullScreenBtn.innerText = "Exit Full Screen";
+  } else {
+    fullScreenBtn.innerText = "Enter Full Screen";
   }
 };
 
@@ -119,8 +121,9 @@ video.addEventListener("timeupdate", handleTimeUpdate);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullScreen);
 video.addEventListener("mousemove", handleMouseMove);
-video.addEventListener("mouseleave", handleMouseLeave);
 // 비디오 클릭시 재생/멈춤
 video.addEventListener("click", handlePlayClick);
 // 스페이스바로 재생/멈춤
 document.addEventListener("keydown", handlePlayKeydown);
+// esc로 전체화면 나가기
+document.addEventListener("fullscreenchange", handleFullscreenChange);

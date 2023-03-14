@@ -5,6 +5,7 @@ let stream;
 let recorder;
 let videoFile;
 
+// so sexy
 const handleDownload = () => {
   const a = document.createElement("a");
   a.href = videoFile;
