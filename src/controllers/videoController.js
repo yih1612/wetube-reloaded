@@ -17,11 +17,11 @@ export const home = async (req, res) => {
 export const watch = async (req, res) => {
   const { id } = req.params; // const id = req.param.id;
   const video = await Video.findById(id);
-  const user = await User.findById(id);
+  const owner = await User.findById(video.owner);
   if (!video) {
     return res.render("404", { pageTitle: "Video not found." });
   }
-  return res.render("watch", { pageTitle: video.title, video, user });
+  return res.render("watch", { pageTitle: video.title, video, owner });
 };
 
 // edit
