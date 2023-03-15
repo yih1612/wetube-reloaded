@@ -16,13 +16,15 @@ block content
       div
         button#fullScreen Enter Full Screen
 
-  //- 
     div
       p= video.description
-      small= video.createAt
-    a(href=`${video.id}/edit`) Edit Video &rarr;
-    br
-    a(href=`${video.id}/delete`) Delete Video &rarr;
+      small= video.createdAt
+    div
+      small Uploaded by #{ owner.name }
+    if String(video.owner) === loggedInUser._id
+      a(href=`${video.id}/edit`) Edit Video &rarr;
+      br
+      a(href=`${video.id}/delete`) Delete Video &rarr;
 
 block scripts
   script(src="/static/js/videoPlayer.js") 

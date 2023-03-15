@@ -1,4 +1,5 @@
 import Video from "../models/Video";
+import User from "../models/User";
 
 // trending
 /* callback
@@ -16,10 +17,11 @@ export const home = async (req, res) => {
 export const watch = async (req, res) => {
   const { id } = req.params; // const id = req.param.id;
   const video = await Video.findById(id);
+  const user = await User.findById(id);
   if (!video) {
     return res.render("404", { pageTitle: "Video not found." });
   }
-  return res.render("watch", { pageTitle: video.title, video });
+  return res.render("watch", { pageTitle: video.title, video, user });
 };
 
 // edit
@@ -52,8 +54,13 @@ export const getUpload = (req, res) => {
   return res.render("upload", { pageTitle: "Upload Video" });
 };
 export const postUpload = async (req, res) => {
-  const { path } = req.file;
-  const { title, description, hashtags } = req.body;
+  const {
+    session: {
+      user: { _id },
+    },
+    file: { path },
+    body: { title, description, hashtags },
+  } = req;
   console.log(description);
 
   try {
@@ -61,6 +68,7 @@ export const postUpload = async (req, res) => {
       title,
       description,
       fileUrl: path,
+      owner: _id,
       hashtags: Video.formatHashtags(hashtags),
     });
     return res.redirect("/");
