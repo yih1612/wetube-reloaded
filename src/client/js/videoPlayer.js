@@ -10,7 +10,6 @@ const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 
 let controlsTimeout = null;
-let controlsMovementTimeout = null;
 let volumeValue = 0.5;
 video.volume = volumeValue;
 
