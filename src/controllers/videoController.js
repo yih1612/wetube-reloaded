@@ -1,4 +1,5 @@
 import Video from "../models/Video";
+import User from "../models/User";
 
 // trending
 /* callback
@@ -59,16 +60,18 @@ export const postUpload = async (req, res) => {
     file: { path },
     body: { title, description, hashtags },
   } = req;
-  console.log(description);
 
   try {
-    await Video.create({
+    const newVideo = await Video.create({
       title,
       description,
       fileUrl: path,
       owner: _id,
       hashtags: Video.formatHashtags(hashtags),
     });
+    const user = await User.findById(_id);
+    user.videos.push(newVideo._id);
+    user.save();
     return res.redirect("/");
   } catch (error) {
     return res.status(400).render("upload", {
