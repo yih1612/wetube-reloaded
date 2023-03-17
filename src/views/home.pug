@@ -2,7 +2,23 @@ extends base
 include mixins/video
 
 block content
-  each video in videos
-    +video(video)
-  else
-    div sorry, not found
+  .video__grid
+    each video in videos
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+    else
+      div sorry, not found
