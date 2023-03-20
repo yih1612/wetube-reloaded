@@ -186,11 +186,14 @@ export const postEdit = async (req, res) => {
 };
 export const logout = (req, res) => {
   req.session.destroy();
+  req.flash("info", "Bye Bye");
   return res.redirect("/");
 };
 
 export const getChangePassword = (req, res) => {
   if (req.session.user.socialOnly === true) {
+    req.flash("error", "Can't change password.");
+
     return res.redirect("/");
   }
   return res.render("./users/change-password", {
@@ -232,6 +235,7 @@ export const postChangePassword = async (req, res) => {
   // logout을 안하고 login중이라면 아래 문구가 필요!
   // req.session.user.password = user.password;
   req.session.destroy();
+  req.flash("info", "Password updated");
   return res.redirect("/login");
 };
 export const see = async (req, res) => {
