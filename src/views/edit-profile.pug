@@ -3,7 +3,7 @@ extends base
 block content
   if message
     span= message
-  form.edit-profile__form(method="POST", enctype="multipart/form-data")
+  form(method="POST", enctype="multipart/form-data")
     label(for="avatar") Avatar
     input#avatar(type="file", name="avatar", accept=".png, .jpg, .jpeg")
     input(
