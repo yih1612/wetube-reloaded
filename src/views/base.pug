@@ -4,11 +4,13 @@ doctype html
 html(lang="ko")
   head
     title #{ pageTitle } | #{ siteName }
-    link(
-      rel="stylesheet",
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-    )
+    //- link(
+    //-   rel="stylesheet",
+    //-   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    //- )
     link(rel="stylesheet", href="/static/css/styles.css")
+  //- favicon.ico 404 error
+  link(rel="icon", href="data:;base64,iVBORw0KGgo=")
   body
     if messages.error
       +message("error", messages.error)

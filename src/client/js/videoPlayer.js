@@ -112,16 +112,24 @@ const handleFullscreenChange = () => {
   }
 };
 
+const handleEnded = () => {
+  const { id } = videoContainer.dataset;
+  fetch(`/api/videos/${id}/view`, {
+    method: "POST",
+  });
+};
+
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click", handleMute);
 volumeRange.addEventListener("input", handleVolumeChange);
 video.addEventListener("loadedmetadata", handleLoadedMetadata);
 video.addEventListener("timeupdate", handleTimeUpdate);
-timeline.addEventListener("input", handleTimelineChange);
-fullScreenBtn.addEventListener("click", handleFullScreen);
 video.addEventListener("mousemove", handleMouseMove);
 // 비디오 클릭시 재생/멈춤
 video.addEventListener("click", handlePlayClick);
+video.addEventListener("ended", handleEnded);
+timeline.addEventListener("input", handleTimelineChange);
+fullScreenBtn.addEventListener("click", handleFullScreen);
 // 스페이스바로 재생/멈춤
 document.addEventListener("keydown", handlePlayKeydown);
 // esc로 전체화면 나가기
