@@ -8,6 +8,7 @@ const timeline = document.getElementById("timeline");
 const fullScreenBtn = document.getElementById("fullScreen");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
+const textarea = document.getElementById("commentTextarea");
 
 let controlsTimeout = null;
 let volumeValue = 0.5;
@@ -94,12 +95,15 @@ const handleMouseMove = () => {
 };
 
 const handlePlayKeydown = (event) => {
-  if (event.key === " ") {
-    event.preventDefault();
-    handlePlayClick();
-  }
-  if (event.key === "F" || event.key === "f") {
-    handleFullScreen();
+  console.log(event);
+  if (event.target !== textarea) {
+    if (event.key === " ") {
+      event.preventDefault();
+      handlePlayClick();
+    }
+    if (event.key === "F" || event.key === "f") {
+      handleFullScreen();
+    }
   }
 };
 
