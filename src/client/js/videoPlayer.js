@@ -95,7 +95,6 @@ const handleMouseMove = () => {
 };
 
 const handlePlayKeydown = (event) => {
-  console.log(event);
   if (event.target !== textarea) {
     if (event.key === " ") {
       event.preventDefault();
