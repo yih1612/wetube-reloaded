@@ -1,5 +1,6 @@
 import Video from "../models/Video";
 import User from "../models/User";
+import Comment from "../models/Comment";
 
 // trending
 /* callback
@@ -143,8 +144,19 @@ export const registerView = async (req, res) => {
 };
 
 export const createComment = async (req, res) => {
-  console.log(req.params);
-  console.log(req.body);
-  console.log(req.body.text, req.body.rating);
-  return res.end();
+  const {
+    params: { id },
+    body: { text },
+    session: { user },
+  } = req;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.sendStatus(404);
+  }
+  const comment = await Comment.create({
+    text,
+    owner: user._id,
+    video: id,
+  });
+  return res.sendStatus(201);
 };
