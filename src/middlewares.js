@@ -1,6 +1,6 @@
 import multer from "multer";
 import multerS3 from "multer-s3";
-import { S3Client } from "@aws-sdk/client-s3";
+import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 const s3 = new S3Client({
   region: "ap-northeast-2",
@@ -34,6 +34,26 @@ const s3VideoUploader = multerS3({
     ab_callback(null, fullPath);
   },
 });
+
+export const avatardeleteMiddleware = async (req, res, next) => {
+  if (!req.file) {
+    console.log("!req.file");
+    return next();
+  }
+  const key = `images/${req.session.user.avatarUrl.split("/")[4]}`;
+  const params = {
+    Bucket: "ggrongsyclone",
+    Key: key,
+  };
+  try {
+    const data = await s3.send(new DeleteObjectCommand(params));
+    console.log("Success. Object deleted.", data);
+  } catch (err) {
+    console.log("Error", err);
+    return res.redirect("/user/edit");
+  }
+  next();
+};
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
