@@ -184,9 +184,11 @@ export const postEdit = async (req, res) => {
   // req.session.message = "success";
   return res.redirect("/users/edit");
 };
-export const logout = (req, res) => {
-  req.session.destroy();
-  req.flash("info", "Bye Bye");
+export const logout = async (req, res) => {
+  await req.flash("info", "Bye Bye");
+  req.session.loggedIn = false;
+  req.session.user = null;
+  // req.session.destroy();
   return res.redirect("/");
 };
 
