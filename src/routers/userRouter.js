@@ -10,7 +10,6 @@ import {
   postChangePassword,
 } from "../controllers/userController";
 import {
-  avatardeleteMiddleware,
   avatarUpload,
   protectorMiddleware,
   publicOnlyMiddleware,
@@ -23,7 +22,7 @@ userRouter
   .route("/edit")
   .all(protectorMiddleware)
   .get(getEdit)
-  .post(avatarUpload.single("avatar"), avatardeleteMiddleware, postEdit);
+  .post(avatarUpload.single("avatar"), postEdit);
 userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
 userRouter.get("/github/finish", publicOnlyMiddleware, finishGithubLogin);
 userRouter
