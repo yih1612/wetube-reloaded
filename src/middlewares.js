@@ -42,7 +42,7 @@ export const avatardeleteMiddleware = async (req, res, next) => {
   }
   const key = `images/${req.session.user.avatarUrl.split("/")[4]}`;
   const params = {
-    Bucket: "ggrongsyclone",
+    Bucket: "wetubenan",
     Key: key,
   };
   try {
