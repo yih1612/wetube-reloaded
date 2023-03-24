@@ -167,11 +167,12 @@ export const postEdit = async (req, res) => {
       });
     }
   }
+  const isHeroku = process.env.NODE_ENV === "production";
   // 사용중인 다른 유저가 없는 username AND email이라면, 내껄로 저장 & UPDATE
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
-      avatarUrl: file ? file.location : avatarUrl,
+      avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
       name,
       email,
       username,
