@@ -122,11 +122,15 @@ const handleEnded = () => {
   });
 };
 
+const isHeroku = process.env.NODE_ENV === "production";
+
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click", handleMute);
 volumeRange.addEventListener("input", handleVolumeChange);
 video.addEventListener("canplay", handleLoadedMetadata);
-handleLoadedMetadata();
+if (isHeroku) {
+  handleLoadedMetadata();
+}
 video.addEventListener("timeupdate", handleTimeUpdate);
 video.addEventListener("mousemove", handleMouseMove);
 // 비디오 클릭시 재생/멈춤

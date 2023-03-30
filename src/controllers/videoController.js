@@ -20,6 +20,7 @@ export const home = async (req, res) => {
 export const watch = async (req, res) => {
   const { id } = req.params; // const id = req.param.id;
   const video = await Video.findById(id).populate("owner").populate("comments");
+  console.log(video);
   if (!video) {
     return res.render("404", { pageTitle: "Video not found." });
   }
@@ -73,15 +74,16 @@ export const postUpload = async (req, res) => {
     session: {
       user: { _id },
     },
-    file: { location, path },
+    files: { video, thumb },
     body: { title, description, hashtags },
   } = req;
-  const isHeroku = process.env.NODE_ENV === "production";
+  console.log(thumb);
   try {
     const newVideo = await Video.create({
       title,
       description,
-      fileUrl: isHeroku ? location : path,
+      fileUrl: isHeroku ? video[0].location : video[0].path,
+      thumbUrl: isHeroku ? thumb[0].location : thumb[0].path,
       owner: _id,
       hashtags: Video.formatHashtags(hashtags),
     });
