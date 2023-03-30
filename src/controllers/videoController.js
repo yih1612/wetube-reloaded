@@ -77,7 +77,7 @@ export const postUpload = async (req, res) => {
     files: { video, thumb },
     body: { title, description, hashtags },
   } = req;
-  console.log(thumb);
+  const isHeroku = process.env.NODE_ENV === "production";
   try {
     const newVideo = await Video.create({
       title,
@@ -92,6 +92,7 @@ export const postUpload = async (req, res) => {
     user.save();
     return res.redirect("/");
   } catch (error) {
+    console.log(error);
     return res.status(400).render("upload", {
       pageTitle: "Upload Video",
       errorMessage: error._message,

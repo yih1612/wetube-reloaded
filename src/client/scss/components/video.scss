@@ -1,8 +1,10 @@
 // video mixin
 .video-mixin {
   .video-mixin__thumb {
-    height: 140px;
-    width: 100%;
+    aspect-ratio: 16/9;
+    // height: 140px;
+    // width: 100%;
+    max-width: 380px;
     border-radius: 7px;
     background-color: ivory;
   }
