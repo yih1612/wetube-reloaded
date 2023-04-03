@@ -237,7 +237,9 @@ export const postChangePassword = async (req, res) => {
   // redirect를 logout으로 하고 있기 때문에 세션에 굳이 넣을 필요가 없다
   // logout을 안하고 login중이라면 아래 문구가 필요!
   // req.session.user.password = user.password;
-  req.session.destroy();
+  req.session.loggedIn = false;
+  req.session.user = null;
+  // req.session.destroy();
   req.flash("info", "Password updated");
   return res.redirect("/login");
 };

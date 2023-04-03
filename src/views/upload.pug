@@ -6,7 +6,7 @@ block content
       video#preview
       button#actionBtn.social__btn Start Recording
     if errorMessage
-      span= errorMessage
+      +message("error", errorMessage)
     form(method="POST", enctype="multipart/form-data")
       label(for="video") Video File
       input#video(name="video", type="file", accept="video/*", required)
