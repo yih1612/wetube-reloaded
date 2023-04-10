@@ -1,11 +1,14 @@
 const video = document.querySelector("video");
 const playBtn = document.getElementById("play");
+const playIcon = playBtn.querySelector("i");
 const muteBtn = document.getElementById("mute");
+const muteIcon = muteBtn.querySelector("i");
 const volumeRange = document.getElementById("volume");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const timeline = document.getElementById("timeline");
 const fullScreenBtn = document.getElementById("fullScreen");
+const fullScreenIcon = fullScreenBtn.querySelector("i");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 const textarea = document.getElementById("commentTextarea");
@@ -15,12 +18,8 @@ let volumeValue = 0.5;
 video.volume = volumeValue;
 
 const handlePlayClick = (e) => {
-  if (video.paused) {
-    video.play();
-  } else {
-    video.pause();
-  }
-  playBtn.innerText = video.paused ? "Play" : "Pause";
+  video.paused ? video.play() : video.pause();
+  playIcon.classList = video.paused ? "fa-solid fa-play" : "fa-solid fa-pause";
 };
 
 const handleMute = (e) => {
@@ -29,7 +28,9 @@ const handleMute = (e) => {
   } else {
     video.muted = true;
   }
-  muteBtn.innerText = video.muted ? "Unmute" : "Mute";
+  muteIcon.classList = video.muted
+    ? "fa-solid fa-volume-xmark"
+    : "fa-solid fa-volume-high";
   volumeRange.value = video.muted ? 0 : volumeValue;
 };
 
@@ -45,10 +46,10 @@ const handleVolumeChange = (event) => {
   video.volume = value;
   if (video.volume === 0) {
     video.muted = true;
-    muteBtn.innerText = "Unmute";
+    muteIcon.classList = "fa-solid fa-volume-xmark";
   } else {
     video.muted = false;
-    muteBtn.innerText = "Mute";
+    muteIcon.classList = "fa-solid fa-volume-high";
   }
 };
 
@@ -109,9 +110,9 @@ const handlePlayKeydown = (event) => {
 const handleFullscreenChange = () => {
   const fullscreen = document.fullscreenElement;
   if (fullscreen) {
-    fullScreenBtn.innerText = "Exit Full Screen";
+    fullScreenIcon.classList = "fa-solid fa-compress";
   } else {
-    fullScreenBtn.innerText = "Enter Full Screen";
+    fullScreenIcon.classList = "fa-solid fa-expand";
   }
 };
 

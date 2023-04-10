@@ -1,0 +1,41 @@
+#videoContainer {
+  position: relative;
+  width: 100%;
+  video {
+    width: 100%;
+  }
+  .video-controls {
+    position: absolute;
+    top: 390px;
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr auto;
+    align-items: center;
+    gap: 10px;
+    width: 95%;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #0f1117;
+    box-sizing: border-box;
+    .video-controls__play {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      .video-controls__playBtn {
+        margin: 0px 15px;
+      }
+    }
+    .video-controls__volume {
+      display: flex;
+      align-items: center;
+      span {
+        margin: 0 10px 0 20px;
+      }
+    }
+    .video-controls__fullScreen {
+      margin: 0px 15px;
+    }
+  }
+}
