@@ -15,42 +15,43 @@ block content
           span#currentTime 00:00
           span &nbsp;/&nbsp;
           span#totalTime 00:00
-      input#timeline(type="range", step="1", value=0, min="0")
+      input#timeline(type="range", step="0.01", value=0, min="0")
       .video-controls__volume
         span#mute
           i.fa-solid.fa-volume-high
-        input#volume(type="range", step="0.1", value=0.5, min="0", max="1")
+        input#volume(type="range", step="0.01", value=0.5, min="0", max="1")
       span#fullScreen.video-controls__fullScreen
         i.fa-solid.fa-expand
 
-    div
-      p= video.description
-      small= video.createdAt
-    div
-      small Uploaded by&nbsp;
-        a(href=`/users/${video.owner._id}`)= video.owner.name
-    if String(video.owner._id) === String(loggedInUser._id)
-      a(href=`${video.id}/edit`) Edit Video &rarr;
-      br
-      a(href=`${video.id}/delete`) Delete Video &rarr;
+  div
+    img(src=video.owner.avatarUrl)
+    p= video.description
+    small= video.createdAt
+  div
+    small Uploaded by&nbsp;
+      a(href=`/users/${video.owner._id}`)= video.owner.name
+  if String(video.owner._id) === String(loggedInUser._id)
+    a(href=`${video.id}/edit`) Edit Video &rarr;
+    br
+    a(href=`${video.id}/delete`) Delete Video &rarr;
 
-    if loggedIn
-      .video__add-comments
-        form#commentForm.video__comment-form
-          textarea#commentTextarea(
-            cols="30",
-            rows="10",
-            placeholder="Write a nice comment..."
-          )
-          button Add Comment
-    .video__comments
-      ul
-        each comment in video.comments.reverse()
-          li.video__comment(data-id=comment.id)
-            i.fas.fa-comment
-            span &nbsp;#{ comment.text }
-            if String(comment.owner) === String(loggedInUser._id)
-              span.delete__icon ❌
+  if loggedIn
+    .video__add-comments
+      form#commentForm.video__comment-form
+        textarea#commentTextarea(
+          cols="30",
+          rows="10",
+          placeholder="Write a nice comment..."
+        )
+        button Add Comment
+  .video__comments
+    ul
+      each comment in video.comments.reverse()
+        li.video__comment(data-id=comment.id)
+          i.fas.fa-comment
+          span &nbsp;#{ comment.text }
+          if String(comment.owner) === String(loggedInUser._id)
+            span.delete__icon ❌
 
 block scripts
   script(src="/static/js/videoPlayer.js") 

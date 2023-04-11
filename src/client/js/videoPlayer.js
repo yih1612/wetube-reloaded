@@ -92,7 +92,7 @@ const handleMouseMove = () => {
   videoControls.classList.add("showing");
   controlsTimeout = setTimeout(() => {
     videoControls.classList.remove("showing");
-  }, 3000);
+  }, 1000);
 };
 
 const handlePlayKeydown = (event) => {

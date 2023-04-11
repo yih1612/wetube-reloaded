@@ -11,4 +11,26 @@
   h3 {
     font-size: 18px;
   }
+  .profile__avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+  .profile__no-avatar {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    background-color: $purple;
+
+    span {
+      position: absolute;
+      top: 24px;
+      left: 40px;
+      text-transform: uppercase;
+      // font-weight: 500;
+      font-size: 100px;
+    }
+  }
 }

@@ -6,25 +6,32 @@
   }
   .video-controls {
     position: absolute;
-    top: 390px;
+    bottom: 30px;
     left: 0;
     right: 0;
     display: grid;
     grid-template-columns: 1fr 4fr 1fr auto;
     align-items: center;
     gap: 10px;
-    width: 95%;
+    width: 93%;
     margin: 0 auto;
     padding: 10px;
     border-radius: 10px;
     background-color: #0f1117;
-    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+    &.showing {
+      opacity: 1;
+    }
     .video-controls__play {
       display: flex;
       justify-content: space-around;
       align-items: center;
       .video-controls__playBtn {
         margin: 0px 15px;
+        i {
+          font-size: 18px;
+        }
       }
     }
     .video-controls__volume {
@@ -36,6 +43,9 @@
     }
     .video-controls__fullScreen {
       margin: 0px 15px;
+      i {
+        font-size: 18px;
+      }
     }
   }
 }

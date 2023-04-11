@@ -9,7 +9,16 @@ mixin video(video)
         style=`background-image:url(/${video.thumbUrl});background-size:cover;background-position:center;`
       )
     .video-mixin__data
-      span.video-mixin__title= video.title
-      .video-mixin__meta
-        span #{ video.owner.name || user.name } •&nbsp;
-        span #{ video.meta.views }&nbsp;views
+      if !video.owner.avatarUrl
+        .video-mixin__no-avatar
+          span= video.owner.name.substring(0, 1)
+      else
+        if isHeroku
+          img.video-mixin__avatar(src=video.owner.avatarUrl)
+        else
+          img.video-mixin__avatar(src="/" + video.owner.avatarUrl)
+      .video-mixin__text
+        span.video-mixin__title= video.title
+        .video-mixin__meta
+          span #{ video.owner.name } •&nbsp;
+          span #{ video.meta.views }&nbsp;views
