@@ -1,3 +1,122 @@
+.total-container {
+  width: 100%;
+  min-width: 590px;
+}
+
+.watch-container {
+  width: 100%;
+  .watch-title {
+    margin: 7px 0;
+    font-size: 26px;
+  }
+  .watch-sub {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    .avatar {
+      margin-right: 10px;
+    }
+    .watch__no-avatar {
+      position: relative;
+      height: 44px;
+      width: 44px;
+      border-radius: 50%;
+      background-color: $purple;
+      span {
+        position: absolute;
+        top: 10px;
+        left: 13px;
+        font-size: 25px;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+    }
+    .watch__avatar {
+      height: 44px;
+      width: 44px;
+      border-radius: 50%;
+    }
+  }
+  .watch-info {
+    margin-bottom: 15px;
+    padding: 12px;
+    background-color: $grey;
+    border-radius: 10px;
+
+    .number {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 17px;
+      opacity: 0.5;
+    }
+    .hashtags {
+      display: block;
+      margin-bottom: 5px;
+      color: $blue;
+    }
+  }
+  .watch-edit {
+    padding: 15px 10px;
+    color: $blue;
+  }
+}
+
+.video__comment-write {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  .video__comment-form {
+    all: unset;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    textarea {
+      all: unset;
+      height: 23px;
+      margin-left: 10px;
+      border-bottom: 1px solid $grey;
+      font-size: 18px;
+      transition: 0.2s ease-in-out;
+      &:focus {
+        border-bottom: 1px solid $blue;
+      }
+    }
+    button {
+      all: unset;
+      margin-left: 10px;
+      padding: 7px 10px;
+      background-color: $grey;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+
+      &:hover {
+        background-color: $blue;
+      }
+    }
+  }
+}
+
+.comment__no-avatar {
+  position: relative;
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+  background-color: $purple;
+  span {
+    position: absolute;
+    top: 10px;
+    left: 13px;
+    font-size: 25px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+}
+.comment__avatar {
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+}
+
 .video__comments {
   display: flex;
   flex-direction: column;

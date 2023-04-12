@@ -20,7 +20,8 @@ html(lang="ko")
       +message("success", messages.success)
     include partials/header
     main
-      block content
+      .main-container
+        block content
     include partials/footer
   script(src="/static/js/main.js")
   block scripts
