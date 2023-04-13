@@ -33,7 +33,10 @@ block content
               span= video.owner.name.substring(0, 1)
           else
             a(href=`/users/${video.owner._id}`)
-              img.watch__avatar(src="/" + video.owner.avatarUrl)
+              if isHeroku
+                img.watch__avatar(src=video.owner.avatarUrl)
+              else
+                img.watch__avatar(src="/" + video.owner.avatarUrl)
         span= video.owner.name
       .watch-info
         span.number #{ video.meta.views } views · #{ moment(video.createdAt).fromNow() }
@@ -66,9 +69,21 @@ block content
       ul
         each comment in video.comments.reverse()
           li.video__comment(data-id=comment.id)
-            i.fas.fa-comment
-            span &nbsp;#{ comment.text }
-            if String(comment.owner) === String(loggedInUser._id)
+            if !comment.owner.avatarUrl
+              a.comment__no-avatar(href=`/users/${comment.owner._id}`)
+                span= comment.owner.name.substring(0, 1)
+            else
+              a(href=`/users/${comment.owner._id}`)
+                if isHeroku
+                  img.comment__avatar(src=comment.owner.avatarUrl)
+                else
+                  img.comment__avatar(src="/" + comment.owner.avatarUrl)
+            div
+              .comment__title
+                span.comment__id= comment.owner.name
+                span.comment__time= moment(comment.createdAt).fromNow()
+              span= comment.text
+            if String(comment.owner._id) === String(loggedInUser._id)
               span.delete__icon ❌
 
 block scripts

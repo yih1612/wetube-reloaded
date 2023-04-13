@@ -34,14 +34,21 @@
         font-size: 26px;
       }
     }
-    .video-mixin__title {
-      margin-top: 10px;
-      font-size: 18px;
-    }
-    .video-mixin__meta {
-      margin-top: 5px;
-      font-size: 12px;
-      opacity: 0.6;
+    .video-mixin__text {
+      display: flex;
+      flex-direction: column;
+      .video-mixin__title {
+        margin-top: 10px;
+        font-size: 18px;
+      }
+      .video-mixin__meta {
+        margin: 5px 0;
+      }
+      .video-mixin__num,
+      .video-mixin__meta {
+        font-size: 14px;
+        opacity: 0.6;
+      }
     }
   }
 }
