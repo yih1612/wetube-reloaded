@@ -20,9 +20,12 @@ header
                 span= loggedInUser.name.substring(0, 1)
             else
               if isHeroku
-                img.header__avatar(src=loggedInUser.avatarUrl)
+                img.header__avatar(src=loggedInUser.avatarUrl, crossorigin)
               else
-                img.header__avatar(src="/" + loggedInUser.avatarUrl)
+                img.header__avatar(
+                  src="/" + loggedInUser.avatarUrl,
+                  crossorigin
+                )
 
       else
         li
