@@ -13,7 +13,6 @@ export const home = async (req, res) => {
   const videos = await Video.find({})
     .sort({ createdAt: "desc" })
     .populate("owner");
-  console.log(videos[0].owner.name.substring(0, 1));
   return res.render("home", { pageTitle: "Home", videos });
 };
 
