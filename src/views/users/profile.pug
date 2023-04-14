@@ -8,9 +8,9 @@ block content
         span= user.name.substring(0, 1)
     else
       if isHeroku
-        img.profile__avatar(src=user.avatarUrl)
+        img.profile__avatar(src=user.avatarUrl, crossorigin)
       else
-        img.profile__avatar(src="/" + user.avatarUrl)
+        img.profile__avatar(src="/" + user.avatarUrl, crossorigin)
     h3= user.name
   .video-grid
     each video in user.videos

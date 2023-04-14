@@ -5,9 +5,9 @@ block content
     #videoContainer(data-id=video._id)
       .video
         if isHeroku
-          video(src=video.fileUrl)
+          video(src=video.fileUrl, crossorigin)
         else
-          video(src=`/${video.fileUrl}`)
+          video(src=`/${video.fileUrl}`, crossorigin)
       #videoControls.video-controls
         .video-controls__play
           span#play.video-controls__playBtn
