@@ -23,7 +23,7 @@ const addComment = (text, id, commentUser, avatar, name) => {
     const img = document.createElement("img");
     img.src = "/" + avatar;
     img.className = "comment__avatar";
-    img.crossOrigin = "crossorigin";
+    img.crossOrigin = "crossOrigin";
     console.log(img);
     a.appendChild(img);
     newComment.appendChild(a);
